@@ -1,3 +1,4 @@
+const API_KEY="ecab5d71ab484108b87a66ac9c206c52"
 const GET_VIDEOGAMES = "GET_VIDEOGAMES"
 const GET_VIDEOGAMES_DETAIL = "GET_VIDEOGAMES_DETAIL"
 const FILTER_BY_GENRE = "FILTER_BY_GENRE"
@@ -9,7 +10,7 @@ const SORT_BY_ORIGIN = "SORT_BY_ORIGIN"
 export function getVideogames(titulo) {
     return function (dispatch) {
         //if (titulo) {
-            return fetch("https://api.rawg.io/api/games?search=" + titulo)
+            return fetch(`https://api.rawg.io/api/games?key=${API_KEY}&search=${titulo}`)
                 .then(response => response.json())
                 .then(json => {
                     dispatch({ type: GET_VIDEOGAMES, payload: json.results });
@@ -19,7 +20,7 @@ export function getVideogames(titulo) {
 }
 export function getVideogamesdetail(id) {
     return function (dispatch) {
-        return fetch("https://api.rawg.io/api/games/" + id)
+      return fetch(`https://api.rawg.io/api/games/${id}?key=${API_KEY}`)
             .then(response => response.json())
             .then(json => {
                 dispatch({ type: GET_VIDEOGAMES_DETAIL, payload: json });
